@@ -86,7 +86,9 @@ This single command will:
 
 **Option 1: One-Command Run (Recommended)**
 ```bash
-./run.sh
+./run.sh # For Unix/Linux/macOS
+# or
+./run.bat #for Windows CMD/PowerShell
 ```
 
 **Option 2: Manual Setup**
