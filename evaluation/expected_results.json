@@ -1,0 +1,167 @@
+{
+  "missing_values": {
+    "expected_issues": [
+      {
+        "type": "missing_values",
+        "column": "age",
+        "count": 2,
+        "severity": "medium"
+      },
+      {
+        "type": "missing_values",
+        "column": "salary",
+        "count": 1,
+        "severity": "low"
+      },
+      {
+        "type": "missing_values",
+        "column": "email",
+        "count": 1,
+        "severity": "low"
+      },
+      {
+        "type": "missing_values",
+        "column": "category",
+        "count": 1,
+        "severity": "low"
+      }
+    ],
+    "expected_fixes": [
+      {
+        "issue_type": "missing_values",
+        "column": "age",
+        "method": "median_imputation"
+      },
+      {
+        "issue_type": "missing_values",
+        "column": "salary",
+        "method": "median_imputation"
+      },
+      {
+        "issue_type": "missing_values",
+        "column": "email",
+        "method": "placeholder_imputation"
+      },
+      {
+        "issue_type": "missing_values",
+        "column": "category",
+        "method": "mode_imputation"
+      }
+    ],
+    "min_quality_score": 60,
+    "min_fix_success_rate": 80
+  },
+  "type_errors": {
+    "expected_issues": [
+      {
+        "type": "type_inconsistency",
+        "column": "price",
+        "count": 2,
+        "severity": "high"
+      },
+      {
+        "type": "type_inconsistency",
+        "column": "quantity",
+        "count": 1,
+        "severity": "high"
+      },
+      {
+        "type": "type_inconsistency",
+        "column": "rating",
+        "count": 2,
+        "severity": "high"
+      },
+      {
+        "type": "type_inconsistency",
+        "column": "is_available",
+        "count": 2,
+        "severity": "medium"
+      }
+    ],
+    "expected_fixes": [
+      {
+        "issue_type": "type_inconsistency",
+        "column": "price",
+        "method": "type_conversion"
+      },
+      {
+        "issue_type": "type_inconsistency",
+        "column": "quantity",
+        "method": "type_conversion"
+      },
+      {
+        "issue_type": "type_inconsistency",
+        "column": "rating",
+        "method": "type_conversion"
+      },
+      {
+        "issue_type": "type_inconsistency",
+        "column": "is_available",
+        "method": "type_conversion"
+      }
+    ],
+    "min_quality_score": 70,
+    "min_fix_success_rate": 85
+  },
+  "outliers": {
+    "expected_issues": [
+      {
+        "type": "outliers",
+        "column": "age",
+        "count": 1,
+        "severity": "high"
+      },
+      {
+        "type": "outliers",
+        "column": "purchase_amount",
+        "count": 1,
+        "severity": "high"
+      },
+      {
+        "type": "duplicates",
+        "column": null,
+        "count": 1,
+        "severity": "medium"
+      }
+    ],
+    "expected_fixes": [
+      {
+        "issue_type": "outliers",
+        "column": "age",
+        "method": "outlier_handling"
+      },
+      {
+        "issue_type": "outliers",
+        "column": "purchase_amount",
+        "method": "outlier_handling"
+      },
+      {
+        "issue_type": "duplicates",
+        "column": null,
+        "method": "duplicate_removal"
+      }
+    ],
+    "min_quality_score": 75,
+    "min_fix_success_rate": 80
+  },
+  "duplicates": {
+    "expected_issues": [
+      {
+        "type": "duplicates",
+        "column": null,
+        "count": 3,
+        "severity": "medium"
+      }
+    ],
+    "expected_fixes": [
+      {
+        "issue_type": "duplicates",
+        "column": null,
+        "method": "duplicate_removal"
+      }
+    ],
+    "min_quality_score": 85,
+    "min_fix_success_rate": 90
+  }
+}
+

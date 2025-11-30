@@ -1,0 +1,12 @@
+name,age,salary,email,category
+Alice,25,50000,alice@example.com,Tech
+Bob,,60000,bob@example.com,Finance
+Charlie,30,,charlie@example.com,Tech
+Diana,28,55000,,Marketing
+Eve,32,70000,eve@example.com,
+Frank,,,frank@example.com,Sales
+Grace,27,52000,grace@example.com,Tech
+Henry,35,80000,henry@example.com,Finance
+Ivy,29,58000,ivy@example.com,Tech
+Jack,31,65000,jack@example.com,Marketing
+

@@ -1,0 +1,33 @@
+# DatasetDoctor - Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# ============================================================================
+# Core Data Processing
+# ============================================================================
+pandas>=2.0.0,<3.0.0          # Data manipulation and analysis (CSV/JSON handling)
+numpy>=1.24.0,<2.0.0          # Mathematical operations (used by pandas)
+
+# ============================================================================
+# Google AI (Gemini) - AI Intelligence Features
+# ============================================================================
+google-genai>=0.2.0           # Vertex AI client (google.genai.Client) - for Vertex AI mode
+google-generativeai>=0.3.0    # Direct API client (google.generativeai) - for simple API key mode
+
+# ============================================================================
+# Web Interface (Flask)
+# ============================================================================
+Flask>=3.0.0,<4.0.0           # Web framework for UI
+Werkzeug>=3.0.0,<4.0.0        # WSGI utilities (file uploads, secure_filename) - comes with Flask but explicit
+
+# ============================================================================
+# Configuration & Environment
+# ============================================================================
+python-dotenv>=1.0.0,<2.0.0   # Load environment variables from .env file
+
+# ============================================================================
+# Optional: Development Tools (not required for running, but useful)
+# ============================================================================
+# Uncomment these if you want to develop/test:
+# pytest>=7.4.0              # Testing framework
+# black>=23.0.0               # Code formatter
+# pylint>=3.0.0               # Code linter

@@ -1,0 +1,12 @@
+product_id,price,quantity,rating,is_available
+P001,29.99,100,4.5,true
+P002,invalid_price,50,4.2,true
+P003,39.99,not_a_number,4.8,false
+P004,49.99,75,not_rated,yes
+P005,59.99,200,4.0,1
+P006,69.99,150,4.7,true
+P007,text_price,100,4.3,false
+P008,79.99,80,4.9,true
+P009,89.99,120,invalid,0
+P010,99.99,90,4.1,true
+

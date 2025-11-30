@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DatasetDoctor - Data Quality Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+            <h1>DatasetDoctor</h1>
+            <p class="subtitle">Your AI-powered Data Quality Assistant. Diagnosing, cleaning, and optimizing your datasets in seconds.</p>
+        </header>
+
+        <div class="upload-section">
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="file-upload">
+                    <input type="file" id="fileInput" name="file" accept=".csv,.json" required>
+                    <label for="fileInput" class="upload-label">
+                        <div class="upload-icon-wrapper">
+                            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7 10L12 5L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 5V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <p class="upload-text-primary">Drag & Drop your dataset</p>
+                        <p class="upload-text-secondary">Supports CSV and JSON files up to 50MB</p>
+                        <button type="button" class="btn-browse" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+                    </label>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.7 6.3C14.5 6.1 14.3 6 14 6C13.7 6 13.5 6.1 13.3 6.3L8.3 11.3C8.1 11.5 8 11.7 8 12C8 12.3 8.1 12.5 8.3 12.7L13.3 17.7C13.5 17.9 13.7 18 14 18C14.3 18 14.5 17.9 14.7 17.7C15.1 17.3 15.1 16.7 14.7 16.3L10.4 12L14.7 7.7C15.1 7.3 15.1 6.7 14.7 6.3Z" fill="white"/>
+                    </svg>
+                    Process Dataset
+                </button>
+            </form>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="loading-content">
+                <div class="spinner-wrapper">
+                    <div class="spinner-ring">
+                        <div class="spinner-chip">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M8 8H16M8 12H16M8 16H12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <h2 id="loadingText">Analyzing Data Structure...</h2>
+                <p class="loading-subtitle">Our AI is scanning your file for inconsistencies.</p>
+                <div class="progress-steps">
+                    <div class="step pending" id="step-ingest">
+                        <div class="step-number">1</div>
+                        <div class="step-check">✓</div>
+                        <span class="step-label">Ingesting</span>
+                    </div>
+                    <div class="step pending" id="step-scan">
+                        <div class="step-number">2</div>
+                        <div class="step-check">✓</div>
+                        <span class="step-label">Scanning</span>
+                    </div>
+                    <div class="step pending" id="step-fix">
+                        <div class="step-number">3</div>
+                        <div class="step-check">✓</div>
+                        <span class="step-label">Fixing</span>
+                    </div>
+                    <div class="step pending" id="step-validate">
+                        <div class="step-number">4</div>
+                        <div class="step-check">✓</div>
+                        <span class="step-label">Validating</span>
+                    </div>
+                    <div class="step pending" id="step-report">
+                        <div class="step-number">5</div>
+                        <div class="step-check">✓</div>
+                        <span class="step-label">Reporting</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="results" class="results hidden">
+            <div class="summary-cards">
+                <div class="card quality-card">
+                    <div class="card-header">
+                        <span class="card-title">QUALITY SCORE</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-value-wrapper">
+                            <span class="card-value" id="qualityScore">-</span>
+                            <span class="card-unit">/ 100</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="qualityProgress"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card issues-card">
+                    <div class="card-header">
+                        <span class="card-title">ISSUES DETECTED</span>
+                        <span class="card-badge critical" id="criticalBadge">Critical</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-value" id="totalIssues">-</div>
+                        <div class="card-subtitle" id="issuesSubtitle">Across columns</div>
+                    </div>
+                </div>
+                <div class="card fixes-card">
+                    <div class="card-header">
+                        <span class="card-title">AUTO-FIXES APPLIED</span>
+                        <span class="card-badge auto">Auto</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-value" id="totalFixes">-</div>
+                        <div class="card-subtitle">Ready for export</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-section dataset-overview">
+                    <h3>Dataset Overview</h3>
+                    <div class="overview-content">
+                        <div class="overview-item">
+                            <span class="overview-label">File:</span>
+                            <span class="overview-value" id="datasetName">-</span>
+                        </div>
+                        <div class="overview-row">
+                            <div class="overview-item">
+                                <span class="overview-label">ROWS:</span>
+                                <span class="overview-value" id="datasetRows">-</span>
+                            </div>
+                            <div class="overview-item">
+                                <span class="overview-label">COLUMNS:</span>
+                                <span class="overview-value" id="datasetCols">-</span>
+                            </div>
+                            <div class="overview-item">
+                                <span class="overview-label">SIZE:</span>
+                                <span class="overview-value" id="datasetSize">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-section export-section">
+                    <h3>Export Results</h3>
+                    <div class="export-options">
+                        <a id="downloadCleaned" class="export-option" download>
+                            <div class="export-icon">📁</div>
+                            <span>Cleaned Dataset</span>
+                            <svg class="export-arrow" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                        <a id="downloadScript" class="export-option" download>
+                            <div class="export-icon">🐍</div>
+                            <span>Python Script</span>
+                            <svg class="export-arrow" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                        <a id="downloadJSON" class="export-option" download>
+                            <div class="export-icon">{ }</div>
+                            <span>JSON Report</span>
+                            <svg class="export-arrow" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                        <a id="viewHTML" class="export-option" target="_blank">
+                            <div class="export-icon">&lt;/&gt;</div>
+                            <span>HTML Report</span>
+                            <svg class="export-arrow" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <p class="privacy-note">Your file is processed locally. No data is stored on our servers.</p>
+                </div>
+            </div>
+
+            <div class="cleaned-file-notice" id="cleanedFileNotice" style="display: none;">
+                <div class="notice-content">
+                    <span class="notice-icon">ℹ️</span>
+                    <div class="notice-text">
+                        <strong>Previously Cleaned File Detected</strong>
+                        <p id="cleanedFileNote"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="issues-log-section" id="issuesLogSection" style="display: none;">
+                <div class="section-header">
+                    <h3>Issues & Fixes Log</h3>
+                    <span class="priority-badge" id="priorityBadge">High Priority</span>
+                </div>
+                <div id="issuesList" class="issues-list"></div>
+            </div>
+        </div>
+
+        <div id="error" class="error hidden">
+            <h3>❌ Error</h3>
+            <p id="errorMessage"></p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 DatasetDoctor. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+

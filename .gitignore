@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+ENV/
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs and traces
+logs/
+*.log
+traces/
+
+# Uploads and outputs (keep structure, ignore files)
+uploads/*
+!uploads/.gitkeep
+outputs/*
+!outputs/.gitkeep
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Docker
+.dockerignore
+
+# Evaluation reports (generated)
+evaluation/metrics_report_*.json
+evaluation/results_*.json
+
+# Memory files (if any)
+memory/*.pkl
+memory/*.json
+
+# Capstone Project folder (reference - keep but can be ignored if too large)
+# Capstone Project/
+

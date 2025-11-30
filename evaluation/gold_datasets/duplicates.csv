@@ -1,0 +1,12 @@
+employee_id,name,department,salary,join_date
+E001,John Smith,Engineering,75000,2020-01-15
+E002,Jane Doe,Marketing,65000,2020-02-20
+E003,Bob Johnson,Sales,60000,2020-03-10
+E001,John Smith,Engineering,75000,2020-01-15
+E004,Alice Brown,Engineering,80000,2020-04-05
+E002,Jane Doe,Marketing,65000,2020-02-20
+E005,Charlie Wilson,HR,55000,2020-05-12
+E006,Diana Lee,Engineering,70000,2020-06-18
+E003,Bob Johnson,Sales,60000,2020-03-10
+E007,Frank Miller,Marketing,68000,2020-07-22
+
